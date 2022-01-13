@@ -1,0 +1,30 @@
+0011000000000000
+0101 010 010 1 00000 ;temp val holder
+0101 011 011 1 00000 ;hold val x
+0101 100 100 1 00000 ;hold val y
+0101 101 101 1 00000 ;hold sum
+0001 010 010 1 00001 ;give x random val
+0011 010 011111010 ;store x @ x3100 (this is mem space x3005)
+0101 010 010 1 00000
+0001 010 010 1 00010 ; give y random val
+0011 010 011111000 ;store y @ x3101
+0101 010 010 1 00000 ;clear temp val holder
+0010 011 011110101 ;load x into r3
+0010 100 011110101 ;load y into r4
+1001 100 100 1 11111 ;make r4 negative
+0001 100 100 1 00001 
+0001 101 011 0 00 100 ;subtract y form x and store into r5
+0000 100 000001010 ;check for negative (x<y) (this is @ mem space x300F)
+0001 101 101 1 00000 
+0000 001 000000011 ;check for positive (x>y)
+0011 010 011101111 ;store zero @x3102 (this is @ mem space x3012)
+0001 101 101 1 00000 
+0000 111 000000111 ;unconditional branch to endpoint 
+0001 010 010 1 00001
+1001 010 010 1 11111
+0001 010 010 1 00001 ;turn 1 into -1
+0011 010 011101001 ;store -1 @ x3102 (this is x3018)
+0000 111 000000010 ;unconditional branch to endpoint
+0001 010 010 1 00001 
+0011 010 011100110 ;store 1 @ x3102 (this is mem space x301B)
+0001 010 010 1 00000 ;endpoint

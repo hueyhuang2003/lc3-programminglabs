@@ -1,0 +1,36 @@
+0011000000000000
+0101 110 110 1 00000 ; temp val holder 
+0101 001 001 1 00000 ; temp val holder
+0101 010 010 1 00000 ; temp val holder
+0101 011 011 1 00000 ; bitmask
+0101 100 100 1 00000 ; holds modified bit vector
+0101 101 101 1 00000 ; loop counter
+0101 111 111 1 00000 ; holds value for # of 0s 
+0001 001 001 1 01111
+0001 001 001 1 00001
+1001 001 001 111111
+0001 001 001 1 00001 ;set loop iterations to #-15 (# of loops left to go thru)
+1110 010 011000001 ; load random address (will be used as bit vector) into r2 (this is @ addr x300B, PC @ x300C)
+0011 010 011110011 ; store bit vector into x3100
+0101 010 010 1 00000 ; clear temp val holder
+0001 011 011 1 00001 ;set up bitmask
+0010 010 011110000 ; load bit vector into register (this is @ x300E)
+0001 110 101 0 00 001 ;add -15 to loop counter and store sum in r6
+0000 010 000000111 ;check if r6, if yes then go to end (this means we have run thru all 16 loops); 
+0101 100 010 0 00 011 ;use bitmask on bit vector and store into r4
+0001 100 100 1 00000
+0000 001 000000001 ;check for positive (means that there is nonzero value instead of zero)
+0001 111 111 1 00001 ;add count to # of zeroes
+0001 011 011 0 00 011; shift bitmask to next bit
+0001 101 101 1 00001 ;add 1 to loop counter
+0000 111 111110110 ;go back to loop
+0011 111 011100111 ;store result at x3101
+0001 010 010 1 00000 ; end
+
+
+
+
+
+
+
+
